@@ -16,6 +16,7 @@ import com.gmail.nossr50.mcMMO;
 import com.gmail.nossr50.config.Config;
 import com.gmail.nossr50.config.experience.ExperienceConfig;
 import com.gmail.nossr50.datatypes.player.McMMOPlayer;
+import com.gmail.nossr50.datatypes.skills.PassiveAbility;
 import com.gmail.nossr50.datatypes.skills.SkillType;
 import com.gmail.nossr50.locale.LocaleLoader;
 import com.gmail.nossr50.skills.SkillManager;
@@ -295,7 +296,7 @@ public class RepairManager extends SkillManager {
      * @return true if bonus granted, false otherwise
      */
     private boolean checkPlayerProcRepair() {
-        if (SkillUtils.activationSuccessful(getSkillLevel(), getActivationChance(), Repair.superRepairMaxChance, Repair.superRepairMaxBonusLevel)) {
+        if (SkillUtils.activationSuccessful(PassiveAbility.SUPER_REPAIR, getPlayer(), getActivationChance(), Repair.superRepairMaxChance, Repair.superRepairMaxBonusLevel)) {
             getPlayer().sendMessage(LocaleLoader.getString("Repair.Skills.FeltEasy"));
             return true;
         }

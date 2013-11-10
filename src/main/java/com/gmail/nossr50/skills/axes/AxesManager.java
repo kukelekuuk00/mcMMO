@@ -4,10 +4,13 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import com.gmail.nossr50.mcMMO;
 import com.gmail.nossr50.datatypes.player.McMMOPlayer;
 import com.gmail.nossr50.datatypes.skills.AbilityType;
+import com.gmail.nossr50.datatypes.skills.PassiveAbility;
 import com.gmail.nossr50.datatypes.skills.SkillType;
 import com.gmail.nossr50.datatypes.skills.ToolType;
+import com.gmail.nossr50.events.skills.PassiveAbilityActivationCheckEvent;
 import com.gmail.nossr50.locale.LocaleLoader;
 import com.gmail.nossr50.skills.SkillManager;
 import com.gmail.nossr50.util.ItemUtils;
@@ -65,7 +68,7 @@ public class AxesManager extends SkillManager {
      * @param damage The amount of damage initially dealt by the event
      */
     public double criticalHit(LivingEntity target, double damage) {
-        if (!SkillUtils.activationSuccessful(getSkillLevel(), getActivationChance(), Axes.criticalHitMaxChance, Axes.criticalHitMaxBonusLevel)) {
+        if (!SkillUtils.activationSuccessful(PassiveAbility.CRITICAL_HIT, getPlayer(), getActivationChance(), Axes.criticalHitMaxChance, Axes.criticalHitMaxBonusLevel)) {
             return 0;
         }
 
@@ -94,8 +97,13 @@ public class AxesManager extends SkillManager {
         int durabilityDamage = 1 + (getSkillLevel() / Axes.impactIncreaseLevel);
 
         for (ItemStack armor : target.getEquipment().getArmorContents()) {
-            if (ItemUtils.isArmor(armor) && Axes.impactChance > Misc.getRandom().nextInt(getActivationChance())) {
-                SkillUtils.handleDurabilityChange(armor, durabilityDamage, Axes.impactMaxDurabilityModifier);
+            if (ItemUtils.isArmor(armor)) {
+                double chance = Axes.impactChance / activationChance;
+                PassiveAbilityActivationCheckEvent event = new PassiveAbilityActivationCheckEvent(getPlayer(), PassiveAbility.IMPACT, chance);
+                mcMMO.p.getServer().getPluginManager().callEvent(event);
+                if (!event.isCancelled() && ((event.getChance() * activationChance) > Misc.getRandom().nextInt(activationChance) || event.isAutomaticSuccess())) {
+                    SkillUtils.handleDurabilityChange(armor, durabilityDamage, Axes.impactMaxDurabilityModifier);
+                }
             }
         }
     }
@@ -106,7 +114,10 @@ public class AxesManager extends SkillManager {
      * @param target The {@link LivingEntity} being affected by the ability
      */
     public double greaterImpact(LivingEntity target) {
-        if (!(Axes.greaterImpactChance > Misc.getRandom().nextInt(getActivationChance()))) {
+        double chance = Axes.greaterImpactChance / activationChance;
+        PassiveAbilityActivationCheckEvent event = new PassiveAbilityActivationCheckEvent(getPlayer(), PassiveAbility.GREATER_IMPACT, chance);
+        mcMMO.p.getServer().getPluginManager().callEvent(event);
+        if (event.isCancelled() || !((event.getChance() * activationChance) > Misc.getRandom().nextInt(activationChance) || event.isAutomaticSuccess())) {
             return 0;
         }
 

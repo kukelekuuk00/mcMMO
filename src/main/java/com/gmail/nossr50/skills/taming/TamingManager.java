@@ -14,7 +14,9 @@ import com.gmail.nossr50.mcMMO;
 import com.gmail.nossr50.config.AdvancedConfig;
 import com.gmail.nossr50.config.Config;
 import com.gmail.nossr50.datatypes.player.McMMOPlayer;
+import com.gmail.nossr50.datatypes.skills.PassiveAbility;
 import com.gmail.nossr50.datatypes.skills.SkillType;
+import com.gmail.nossr50.events.skills.PassiveAbilityActivationCheckEvent;
 import com.gmail.nossr50.locale.LocaleLoader;
 import com.gmail.nossr50.runnables.skills.BleedTimerTask;
 import com.gmail.nossr50.skills.SkillManager;
@@ -92,7 +94,10 @@ public class TamingManager extends SkillManager {
      * @param damage The damage being absorbed by the wolf
      */
     public void fastFoodService(Wolf wolf, double damage) {
-        if (Taming.fastFoodServiceActivationChance > Misc.getRandom().nextInt(getActivationChance())) {
+        double chance = Taming.fastFoodServiceActivationChance / activationChance;
+        PassiveAbilityActivationCheckEvent event = new PassiveAbilityActivationCheckEvent(getPlayer(), PassiveAbility.FAST_FOOD, chance);
+        mcMMO.p.getServer().getPluginManager().callEvent(event);
+        if (event.isCancelled() || !((event.getChance() * activationChance) > Misc.getRandom().nextInt(activationChance) || event.isAutomaticSuccess())) {
 
             double health = wolf.getHealth();
             double maxHealth = wolf.getMaxHealth();
@@ -112,7 +117,7 @@ public class TamingManager extends SkillManager {
      * @param wolf The wolf using the ability
      */
     public double gore(LivingEntity target, double damage, Wolf wolf) {
-        if (!SkillUtils.activationSuccessful(getSkillLevel(), getActivationChance(), Taming.goreMaxChance, Taming.goreMaxBonusLevel)) {
+        if (!SkillUtils.activationSuccessful(PassiveAbility.GORE, getPlayer(), getActivationChance(), Taming.goreMaxChance, Taming.goreMaxBonusLevel)) {
             return 0;
         }
 

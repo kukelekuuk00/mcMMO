@@ -11,6 +11,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import com.gmail.nossr50.mcMMO;
 import com.gmail.nossr50.datatypes.player.McMMOPlayer;
+import com.gmail.nossr50.datatypes.skills.PassiveAbility;
 import com.gmail.nossr50.datatypes.skills.SkillType;
 import com.gmail.nossr50.locale.LocaleLoader;
 import com.gmail.nossr50.skills.SkillManager;
@@ -60,7 +61,7 @@ public class ArcheryManager extends SkillManager {
      * @param target The {@link LivingEntity} damaged by the arrow
      */
     public void trackArrows(LivingEntity target) {
-        if (SkillUtils.activationSuccessful(getSkillLevel(), getActivationChance(), Archery.retrieveMaxChance, Archery.retrieveMaxBonusLevel)) {
+        if (SkillUtils.activationSuccessful(PassiveAbility.TRACK_ARROWS, getPlayer(), getActivationChance(), Archery.retrieveMaxChance, Archery.retrieveMaxBonusLevel)) {
             Archery.incrementTrackerValue(target);
         }
     }
@@ -72,7 +73,7 @@ public class ArcheryManager extends SkillManager {
      * @param arrow The {@link Arrow} that was fired
      */
     public double daze(Player defender, Arrow arrow) {
-        if (!SkillUtils.activationSuccessful(getSkillLevel(), getActivationChance(), Archery.dazeMaxBonus, Archery.dazeMaxBonusLevel)) {
+        if (!SkillUtils.activationSuccessful(PassiveAbility.DAZE, getPlayer(), getActivationChance(), Archery.dazeMaxBonus, Archery.dazeMaxBonusLevel)) {
             return 0;
         }
 

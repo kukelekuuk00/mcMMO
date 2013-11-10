@@ -18,7 +18,9 @@ import com.gmail.nossr50.config.Config;
 import com.gmail.nossr50.config.HiddenConfig;
 import com.gmail.nossr50.datatypes.player.McMMOPlayer;
 import com.gmail.nossr50.datatypes.skills.AbilityType;
+import com.gmail.nossr50.datatypes.skills.PassiveAbility;
 import com.gmail.nossr50.datatypes.skills.SkillType;
+import com.gmail.nossr50.events.skills.PassiveAbilityActivationCheckEvent;
 import com.gmail.nossr50.locale.LocaleLoader;
 import com.gmail.nossr50.util.ItemUtils;
 import com.gmail.nossr50.util.Misc;
@@ -187,12 +189,16 @@ public class SkillUtils {
         itemStack.setDurability((short) Math.min(itemStack.getDurability() + durabilityModifier, maxDurability));
     }
 
-    public static boolean activationSuccessful(Player player, SkillType skill, double maxChance, int maxLevel) {
-        return activationSuccessful(UserManager.getPlayer(player).getSkillLevel(skill), PerksUtils.handleLuckyPerks(player, skill), maxChance, maxLevel);
+    public static boolean activationSuccessful(PassiveAbility passiveAbility, Player player, SkillType skill, double maxChance, int maxLevel) {
+        return activationSuccessful(passiveAbility, player, PerksUtils.handleLuckyPerks(player, skill), maxChance, maxLevel);
     }
 
-    public static boolean activationSuccessful(int skillLevel, int activationChance, double maxChance, int maxLevel) {
-        return (maxChance / maxLevel) * Math.min(skillLevel, maxLevel) > Misc.getRandom().nextInt(activationChance);
+    public static boolean activationSuccessful(PassiveAbility passiveAbility, Player player, int activationChance, double maxChance, int maxLevel) {
+        int skillLevel = UserManager.getPlayer(player).getSkillLevel(passiveAbility.getSkill());
+        double chance = (maxChance / maxLevel) * Math.min(skillLevel, maxLevel) / activationChance;
+        PassiveAbilityActivationCheckEvent event = new PassiveAbilityActivationCheckEvent(player, passiveAbility, chance);
+        mcMMO.p.getServer().getPluginManager().callEvent(event);
+        return !event.isCancelled() && ((event.getChance() * activationChance) > Misc.getRandom().nextInt(activationChance) || event.isAutomaticSuccess());
     }
 
     public static boolean treasureDropSuccessful(double dropChance, int activationChance) {

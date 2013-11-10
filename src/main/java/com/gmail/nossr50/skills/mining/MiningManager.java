@@ -15,6 +15,7 @@ import com.gmail.nossr50.mcMMO;
 import com.gmail.nossr50.config.Config;
 import com.gmail.nossr50.datatypes.player.McMMOPlayer;
 import com.gmail.nossr50.datatypes.skills.AbilityType;
+import com.gmail.nossr50.datatypes.skills.PassiveAbility;
 import com.gmail.nossr50.datatypes.skills.SkillType;
 import com.gmail.nossr50.locale.LocaleLoader;
 import com.gmail.nossr50.runnables.skills.AbilityCooldownTask;
@@ -77,7 +78,7 @@ public class MiningManager extends SkillManager {
         boolean silkTouch = player.getItemInHand().containsEnchantment(Enchantment.SILK_TOUCH);
 
         for (int i = mcMMOPlayer.getAbilityMode(skill.getAbility()) ? 2 : 1; i != 0; i--) {
-            if (SkillUtils.activationSuccessful(getSkillLevel(), getActivationChance(), Mining.doubleDropsMaxChance, Mining.doubleDropsMaxLevel)) {
+            if (SkillUtils.activationSuccessful(PassiveAbility.MINING_DOUBLE_DROPS, getPlayer(), getActivationChance(), Mining.doubleDropsMaxChance, Mining.doubleDropsMaxLevel)) {
                 if (silkTouch) {
                     Mining.handleSilkTouchDrops(blockState);
                 }

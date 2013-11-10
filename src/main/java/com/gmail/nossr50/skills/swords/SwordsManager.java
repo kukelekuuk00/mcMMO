@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 
 import com.gmail.nossr50.datatypes.player.McMMOPlayer;
 import com.gmail.nossr50.datatypes.skills.AbilityType;
+import com.gmail.nossr50.datatypes.skills.PassiveAbility;
 import com.gmail.nossr50.datatypes.skills.SkillType;
 import com.gmail.nossr50.datatypes.skills.ToolType;
 import com.gmail.nossr50.locale.LocaleLoader;
@@ -43,7 +44,7 @@ public class SwordsManager extends SkillManager {
      * @param target The defending entity
      */
     public void bleedCheck(LivingEntity target) {
-        if (SkillUtils.activationSuccessful(getSkillLevel(), getActivationChance(), Swords.bleedMaxChance, Swords.bleedMaxBonusLevel)) {
+        if (SkillUtils.activationSuccessful(PassiveAbility.BLEED, getPlayer(), getActivationChance(), Swords.bleedMaxChance, Swords.bleedMaxBonusLevel)) {
 
             if (getSkillLevel() >= Swords.bleedMaxBonusLevel) {
                 BleedTimerTask.add(target, Swords.bleedMaxTicks);
@@ -77,7 +78,7 @@ public class SwordsManager extends SkillManager {
             return;
         }
 
-        if (SkillUtils.activationSuccessful(getSkillLevel(), getActivationChance(), Swords.counterAttackMaxChance, Swords.counterAttackMaxBonusLevel)) {
+        if (SkillUtils.activationSuccessful(PassiveAbility.COUNTER_ATTACK, getPlayer(), getActivationChance(), Swords.counterAttackMaxChance, Swords.counterAttackMaxBonusLevel)) {
             CombatUtils.dealDamage(attacker, damage / Swords.counterAttackModifier);
 
             getPlayer().sendMessage(LocaleLoader.getString("Swords.Combat.Countered"));
