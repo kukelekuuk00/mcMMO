@@ -101,7 +101,7 @@ public class AxesManager extends SkillManager {
                 double chance = Axes.impactChance / activationChance;
                 PassiveAbilityActivationCheckEvent event = new PassiveAbilityActivationCheckEvent(getPlayer(), PassiveAbility.IMPACT, chance);
                 mcMMO.p.getServer().getPluginManager().callEvent(event);
-                if (!event.isCancelled() && ((event.getChance() * activationChance) > Misc.getRandom().nextInt(activationChance) || event.isAutomaticSuccess())) {
+                if ((event.getChance() * activationChance) > Misc.getRandom().nextInt(activationChance)) {
                     SkillUtils.handleDurabilityChange(armor, durabilityDamage, Axes.impactMaxDurabilityModifier);
                 }
             }
@@ -117,7 +117,7 @@ public class AxesManager extends SkillManager {
         double chance = Axes.greaterImpactChance / activationChance;
         PassiveAbilityActivationCheckEvent event = new PassiveAbilityActivationCheckEvent(getPlayer(), PassiveAbility.GREATER_IMPACT, chance);
         mcMMO.p.getServer().getPluginManager().callEvent(event);
-        if (event.isCancelled() || !((event.getChance() * activationChance) > Misc.getRandom().nextInt(activationChance) || event.isAutomaticSuccess())) {
+        if ((event.getChance() * activationChance) <= Misc.getRandom().nextInt(activationChance)) {
             return 0;
         }
 

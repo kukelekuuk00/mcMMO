@@ -198,11 +198,13 @@ public class SkillUtils {
         double chance = (maxChance / maxLevel) * Math.min(skillLevel, maxLevel) / activationChance;
         PassiveAbilityActivationCheckEvent event = new PassiveAbilityActivationCheckEvent(player, passiveAbility, chance);
         mcMMO.p.getServer().getPluginManager().callEvent(event);
-        return !event.isCancelled() && ((event.getChance() * activationChance) > Misc.getRandom().nextInt(activationChance) || event.isAutomaticSuccess());
+        return (event.getChance() * activationChance) > Misc.getRandom().nextInt(activationChance);
     }
 
-    public static boolean treasureDropSuccessful(double dropChance, int activationChance) {
-        return dropChance > Misc.getRandom().nextDouble() * activationChance;
+    public static boolean treasureDropSuccessful(Player player, double dropChance, int activationChance) {;
+        PassiveAbilityActivationCheckEvent event = new PassiveAbilityActivationCheckEvent(player, PassiveAbility.TREASURE_DROP, dropChance);
+        mcMMO.p.getServer().getPluginManager().callEvent(event);
+        return (event.getChance() * activationChance) > (Misc.getRandom().nextDouble() * activationChance);
     }
 
     private static boolean isLocalizedSkill(String skillName) {

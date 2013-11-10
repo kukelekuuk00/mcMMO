@@ -25,6 +25,7 @@ public enum PassiveAbility {
     FAST_FOOD(SkillType.TAMING),
     GORE(SkillType.TAMING),
     WOODCUTTING_DOUBLE_DROPS(SkillType.WOODCUTTING),
+    TREASURE_DROP(SkillType.EXCAVATION),
     ;
 
 

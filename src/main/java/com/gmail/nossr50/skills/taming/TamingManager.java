@@ -97,7 +97,7 @@ public class TamingManager extends SkillManager {
         double chance = Taming.fastFoodServiceActivationChance / activationChance;
         PassiveAbilityActivationCheckEvent event = new PassiveAbilityActivationCheckEvent(getPlayer(), PassiveAbility.FAST_FOOD, chance);
         mcMMO.p.getServer().getPluginManager().callEvent(event);
-        if (event.isCancelled() || !((event.getChance() * activationChance) > Misc.getRandom().nextInt(activationChance) || event.isAutomaticSuccess())) {
+        if ((event.getChance() * activationChance) > Misc.getRandom().nextInt(activationChance)) {
 
             double health = wolf.getHealth();
             double maxHealth = wolf.getMaxHealth();
