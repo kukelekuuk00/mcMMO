@@ -202,7 +202,7 @@ public class SkillUtils {
     }
 
     public static boolean treasureDropSuccessful(Player player, double dropChance, int activationChance) {;
-        PassiveAbilityActivationCheckEvent event = new PassiveAbilityActivationCheckEvent(player, PassiveAbility.TREASURE_DROP, dropChance);
+        PassiveAbilityActivationCheckEvent event = new PassiveAbilityActivationCheckEvent(player, PassiveAbility.TREASURE_DROP, dropChance / activationChance);
         mcMMO.p.getServer().getPluginManager().callEvent(event);
         return (event.getChance() * activationChance) > (Misc.getRandom().nextDouble() * activationChance);
     }
