@@ -34,24 +34,25 @@ import com.gmail.nossr50.util.skills.ParticleEffectUtils;
 import com.google.common.collect.ImmutableList;
 
 public enum SkillType {
-    ACROBATICS(AcrobaticsManager.class, Color.WHITE),
-    ARCHERY(ArcheryManager.class, Color.MAROON),
-    AXES(AxesManager.class, Color.AQUA, AbilityType.SKULL_SPLITTER, ToolType.AXE),
-    EXCAVATION(ExcavationManager.class, Color.fromRGB(139, 69, 19), AbilityType.GIGA_DRILL_BREAKER, ToolType.SHOVEL),
-    FISHING(FishingManager.class, Color.NAVY),
-    HERBALISM(HerbalismManager.class, Color.GREEN, AbilityType.GREEN_TERRA, ToolType.HOE),
-    MINING(MiningManager.class, Color.GRAY, AbilityType.SUPER_BREAKER, ToolType.PICKAXE),
-    REPAIR(RepairManager.class, Color.SILVER),
-    SMELTING(SmeltingManager.class, Color.YELLOW),
-    SWORDS(SwordsManager.class, Color.fromRGB(178, 34, 34), AbilityType.SERRATED_STRIKES, ToolType.SWORD),
-    TAMING(TamingManager.class, Color.PURPLE),
-    UNARMED(UnarmedManager.class, Color.BLACK, AbilityType.BERSERK, ToolType.FISTS),
-    WOODCUTTING(WoodcuttingManager.class, Color.OLIVE, AbilityType.TREE_FELLER, ToolType.AXE);
+    ACROBATICS(AcrobaticsManager.class, Color.WHITE, ImmutableList.of(PassiveAbility.DODGE, PassiveAbility.ROLL, PassiveAbility.GRACEFUL_ROLL)),
+    ARCHERY(ArcheryManager.class, Color.MAROON, ImmutableList.of(PassiveAbility.TRACK_ARROWS, PassiveAbility.DAZE)),
+    AXES(AxesManager.class, Color.AQUA, AbilityType.SKULL_SPLITTER, ToolType.AXE, ImmutableList.of(PassiveAbility.CRITICAL_HIT, PassiveAbility.IMPACT, PassiveAbility.GREATER_IMPACT)),
+    EXCAVATION(ExcavationManager.class, Color.fromRGB(139, 69, 19), AbilityType.GIGA_DRILL_BREAKER, ToolType.SHOVEL, ImmutableList.of(PassiveAbility.TREASURE_DROP)),
+    FISHING(FishingManager.class, Color.NAVY, ImmutableList.of(PassiveAbility.SHAKE)),
+    HERBALISM(HerbalismManager.class, Color.GREEN, AbilityType.GREEN_TERRA, ToolType.HOE, ImmutableList.of(PassiveAbility.GREEN_THUMB, PassiveAbility.SHROOM_THUMB, PassiveAbility.HYLIAN_LUCK, PassiveAbility.GREEN_THUMB_BLOCK, PassiveAbility.HERBALISM_DOUBLE_DROPS)),
+    MINING(MiningManager.class, Color.GRAY, AbilityType.SUPER_BREAKER, ToolType.PICKAXE, ImmutableList.of(PassiveAbility.MINING_DOUBLE_DROPS)),
+    REPAIR(RepairManager.class, Color.SILVER, ImmutableList.of(PassiveAbility.SUPER_REPAIR)),
+    SMELTING(SmeltingManager.class, Color.YELLOW, ImmutableList.of(PassiveAbility.SECOND_SMELT)),
+    SWORDS(SwordsManager.class, Color.fromRGB(178, 34, 34), AbilityType.SERRATED_STRIKES, ToolType.SWORD, ImmutableList.of(PassiveAbility.BLEED, PassiveAbility.COUNTER_ATTACK)),
+    TAMING(TamingManager.class, Color.PURPLE, ImmutableList.of(PassiveAbility.FAST_FOOD, PassiveAbility.GORE)),
+    UNARMED(UnarmedManager.class, Color.BLACK, AbilityType.BERSERK, ToolType.FISTS, ImmutableList.of(PassiveAbility.IRON_GRIP, PassiveAbility.DEFLECT, PassiveAbility.DISARM)),
+    WOODCUTTING(WoodcuttingManager.class, Color.OLIVE, AbilityType.TREE_FELLER, ToolType.AXE, ImmutableList.of(PassiveAbility.WOODCUTTING_DOUBLE_DROPS));
 
     private Class<? extends SkillManager> managerClass;
     private Color runescapeColor;
     private AbilityType ability;
     private ToolType tool;
+    private List<PassiveAbility> passiveAbilities;
 
     public static final List<String> SKILL_NAMES;
 
@@ -85,18 +86,16 @@ public enum SkillType {
         NON_CHILD_SKILLS = ImmutableList.copyOf(nonChildSkills);
     }
 
-    private SkillType(Class<? extends SkillManager> managerClass, Color runescapeColor) {
-        this.managerClass = managerClass;
-        this.runescapeColor = runescapeColor;
-        ability = null;
-        tool = null;
+    private SkillType(Class<? extends SkillManager> managerClass, Color runescapeColor, List<PassiveAbility> passives) {
+        this(managerClass, runescapeColor, null, null, passives);
     }
 
-    private SkillType(Class<? extends SkillManager> managerClass, Color runescapeColor, AbilityType ability, ToolType tool) {
+    private SkillType(Class<? extends SkillManager> managerClass, Color runescapeColor, AbilityType ability, ToolType tool, List<PassiveAbility> passives) {
         this.managerClass = managerClass;
         this.runescapeColor = runescapeColor;
         this.ability = ability;
         this.tool = tool;
+        this.passiveAbilities = passives;
     }
 
     public Class<? extends SkillManager> getManagerClass() {
@@ -148,6 +147,10 @@ public enum SkillType {
         return tool;
     }
 
+    public List<PassiveAbility> getPassiveAbilities() {
+        return passiveAbilities;
+    }
+
     public double getXpModifier() {
         return ExperienceConfig.getInstance().getFormulaSkillModifier(this);
     }
@@ -183,6 +186,15 @@ public enum SkillType {
             default:
                 return false;
         }
+    }
+
+    public static SkillType byPassiveAbility(PassiveAbility passiveAbility) {
+        for (SkillType type : values()) {
+            if (type.getPassiveAbilities().contains(passiveAbility)) {
+                return type;
+            }
+        }
+        return null;
     }
 
     public static SkillType byAbility(AbilityType ability) {
