@@ -169,7 +169,7 @@ public class HerbalismManager extends SkillManager {
         }
 
         for (int i = greenTerra ? 2 : 1; i != 0; i--) {
-            if (SkillUtils.activationSuccessful(PassiveAbility.HERBALISM_DOUBLE_DROPS, getPlayer(), getActivationChance(), Herbalism.doubleDropsMaxChance, Herbalism.doubleDropsMaxLevel)) {
+            if (SkillUtils.activationSuccessful(PassiveAbility.HERBALISM_DOUBLE_DROPS, getPlayer(), getSkillLevel(), getActivationChance(), Herbalism.doubleDropsMaxChance, Herbalism.doubleDropsMaxLevel)) {
                 for (ItemStack item : drops) {
                     Misc.dropItems(blockState.getLocation(), item, amount);
                 }
@@ -184,7 +184,7 @@ public class HerbalismManager extends SkillManager {
      * @return true if the ability was successful, false otherwise
      */
     public boolean processGreenThumbBlocks(BlockState blockState) {
-        if (!SkillUtils.activationSuccessful(PassiveAbility.GREEN_THUMB_BLOCK, getPlayer(), getActivationChance(), Herbalism.greenThumbMaxChance, Herbalism.greenThumbMaxLevel)) {
+        if (!SkillUtils.activationSuccessful(PassiveAbility.GREEN_THUMB_BLOCK, getPlayer(), getSkillLevel(), getActivationChance(), Herbalism.greenThumbMaxChance, Herbalism.greenThumbMaxLevel)) {
             getPlayer().sendMessage(LocaleLoader.getString("Herbalism.Ability.GTh.Fail"));
             return false;
         }
@@ -199,7 +199,7 @@ public class HerbalismManager extends SkillManager {
      * @return true if the ability was successful, false otherwise
      */
     public boolean processHylianLuck(BlockState blockState) {
-        if (!SkillUtils.activationSuccessful(PassiveAbility.HYLIAN_LUCK, getPlayer(), getActivationChance(), Herbalism.hylianLuckMaxChance, Herbalism.hylianLuckMaxLevel)) {
+        if (!SkillUtils.activationSuccessful(PassiveAbility.HYLIAN_LUCK, getPlayer(), getSkillLevel(), getActivationChance(), Herbalism.hylianLuckMaxChance, Herbalism.hylianLuckMaxLevel)) {
             return false;
         }
 
@@ -267,7 +267,7 @@ public class HerbalismManager extends SkillManager {
         playerInventory.removeItem(new ItemStack(Material.RED_MUSHROOM));
         player.updateInventory();
 
-        if (!SkillUtils.activationSuccessful(PassiveAbility.SHROOM_THUMB, getPlayer(), getActivationChance(), Herbalism.shroomThumbMaxChance, Herbalism.shroomThumbMaxLevel)) {
+        if (!SkillUtils.activationSuccessful(PassiveAbility.SHROOM_THUMB, getPlayer(), getSkillLevel(), getActivationChance(), Herbalism.shroomThumbMaxChance, Herbalism.shroomThumbMaxLevel)) {
             player.sendMessage(LocaleLoader.getString("Herbalism.Ability.ShroomThumb.Fail"));
             return false;
         }
@@ -311,7 +311,7 @@ public class HerbalismManager extends SkillManager {
             return;
         }
 
-        if (!greenTerra && !SkillUtils.activationSuccessful(PassiveAbility.GREEN_THUMB, getPlayer(), getActivationChance(), Herbalism.greenThumbMaxChance, Herbalism.greenThumbMaxLevel)) {
+        if (!greenTerra && !SkillUtils.activationSuccessful(PassiveAbility.GREEN_THUMB, getPlayer(), getSkillLevel(), getActivationChance(), Herbalism.greenThumbMaxChance, Herbalism.greenThumbMaxLevel)) {
             return;
         }
 

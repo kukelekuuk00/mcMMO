@@ -29,7 +29,7 @@ public class SmeltingManager extends SkillManager {
     }
 
     public boolean isDoubleDropSuccessful() {
-        return Permissions.doubleDrops(getPlayer(), skill) && SkillUtils.activationSuccessful(PassiveAbility.MINING_DOUBLE_DROPS, getPlayer(), getActivationChance(), Mining.doubleDropsMaxChance, Mining.doubleDropsMaxLevel);
+        return Permissions.doubleDrops(getPlayer(), skill) && SkillUtils.activationSuccessful(PassiveAbility.MINING_DOUBLE_DROPS, getPlayer(), getSkillLevel(), getActivationChance(), Mining.doubleDropsMaxChance, Mining.doubleDropsMaxLevel);
     }
 
     /**
@@ -87,7 +87,7 @@ public class SmeltingManager extends SkillManager {
 
         applyXpGain(Smelting.getResourceXp(smelting));
 
-        if (Permissions.doubleDrops(player, skill) && SkillUtils.activationSuccessful(PassiveAbility.SECOND_SMELT, getPlayer(), getActivationChance(), Smelting.secondSmeltMaxChance, Smelting.secondSmeltMaxLevel)) {
+        if (Permissions.doubleDrops(player, skill) && SkillUtils.activationSuccessful(PassiveAbility.SECOND_SMELT, player, getSkillLevel(), getActivationChance(), Smelting.secondSmeltMaxChance, Smelting.secondSmeltMaxLevel)) {
             ItemStack newResult = result.clone();
 
             newResult.setAmount(result.getAmount() + 1);

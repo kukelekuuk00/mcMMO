@@ -296,7 +296,7 @@ public class RepairManager extends SkillManager {
      * @return true if bonus granted, false otherwise
      */
     private boolean checkPlayerProcRepair() {
-        if (SkillUtils.activationSuccessful(PassiveAbility.SUPER_REPAIR, getPlayer(), getActivationChance(), Repair.superRepairMaxChance, Repair.superRepairMaxBonusLevel)) {
+        if (SkillUtils.activationSuccessful(PassiveAbility.SUPER_REPAIR, getPlayer(), getSkillLevel(), getActivationChance(), Repair.superRepairMaxChance, Repair.superRepairMaxBonusLevel)) {
             getPlayer().sendMessage(LocaleLoader.getString("Repair.Skills.FeltEasy"));
             return true;
         }

@@ -53,7 +53,7 @@ public class AcrobaticsManager extends SkillManager {
         double modifiedDamage = Acrobatics.calculateModifiedDodgeDamage(damage, Acrobatics.dodgeDamageModifier);
         Player player = getPlayer();
 
-        if (!isFatal(modifiedDamage) && SkillUtils.activationSuccessful(PassiveAbility.DODGE, player, getActivationChance(), Acrobatics.dodgeMaxChance, Acrobatics.dodgeMaxBonusLevel)) {
+        if (!isFatal(modifiedDamage) && SkillUtils.activationSuccessful(PassiveAbility.DODGE, player, getSkillLevel(), getActivationChance(), Acrobatics.dodgeMaxChance, Acrobatics.dodgeMaxBonusLevel)) {
             ParticleEffectUtils.playDodgeEffect(player);
 
             if (mcMMOPlayer.useChatNotifications()) {
@@ -86,7 +86,7 @@ public class AcrobaticsManager extends SkillManager {
 
         double modifiedDamage = Acrobatics.calculateModifiedRollDamage(damage, Acrobatics.rollThreshold);
 
-        if (!isFatal(modifiedDamage) && SkillUtils.activationSuccessful(PassiveAbility.ROLL, player, getActivationChance(), Acrobatics.rollMaxChance, Acrobatics.rollMaxBonusLevel)) {
+        if (!isFatal(modifiedDamage) && SkillUtils.activationSuccessful(PassiveAbility.ROLL, player, getSkillLevel(), getActivationChance(), Acrobatics.rollMaxChance, Acrobatics.rollMaxBonusLevel)) {
             player.sendMessage(LocaleLoader.getString("Acrobatics.Roll.Text"));
             applyXpGain(calculateRollXP(damage, true));
 
@@ -110,7 +110,7 @@ public class AcrobaticsManager extends SkillManager {
     private double gracefulRollCheck(double damage) {
         double modifiedDamage = Acrobatics.calculateModifiedRollDamage(damage, Acrobatics.gracefulRollThreshold);
 
-        if (!isFatal(modifiedDamage) && SkillUtils.activationSuccessful(PassiveAbility.GRACEFUL_ROLL, getPlayer(), getActivationChance(), Acrobatics.gracefulRollMaxChance, Acrobatics.gracefulRollMaxBonusLevel)) {
+        if (!isFatal(modifiedDamage) && SkillUtils.activationSuccessful(PassiveAbility.GRACEFUL_ROLL, getPlayer(), getSkillLevel(), getActivationChance(), Acrobatics.gracefulRollMaxChance, Acrobatics.gracefulRollMaxBonusLevel)) {
             getPlayer().sendMessage(LocaleLoader.getString("Acrobatics.Ability.Proc"));
             applyXpGain(calculateRollXP(damage, true));
 

@@ -61,7 +61,7 @@ public class ArcheryManager extends SkillManager {
      * @param target The {@link LivingEntity} damaged by the arrow
      */
     public void trackArrows(LivingEntity target) {
-        if (SkillUtils.activationSuccessful(PassiveAbility.TRACK_ARROWS, getPlayer(), getActivationChance(), Archery.retrieveMaxChance, Archery.retrieveMaxBonusLevel)) {
+        if (SkillUtils.activationSuccessful(PassiveAbility.TRACK_ARROWS, getPlayer(), getSkillLevel(), getActivationChance(), Archery.retrieveMaxChance, Archery.retrieveMaxBonusLevel)) {
             Archery.incrementTrackerValue(target);
         }
     }
@@ -73,7 +73,7 @@ public class ArcheryManager extends SkillManager {
      * @param arrow The {@link Arrow} that was fired
      */
     public double daze(Player defender, Arrow arrow) {
-        if (!SkillUtils.activationSuccessful(PassiveAbility.DAZE, getPlayer(), getActivationChance(), Archery.dazeMaxBonus, Archery.dazeMaxBonusLevel)) {
+        if (!SkillUtils.activationSuccessful(PassiveAbility.DAZE, getPlayer(), getSkillLevel(), getActivationChance(), Archery.dazeMaxBonus, Archery.dazeMaxBonusLevel)) {
             return 0;
         }
 

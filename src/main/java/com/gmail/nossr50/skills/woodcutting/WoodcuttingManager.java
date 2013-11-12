@@ -41,7 +41,7 @@ public class WoodcuttingManager extends SkillManager {
     }
 
     protected boolean canGetDoubleDrops() {
-        return Permissions.doubleDrops(getPlayer(), skill) && SkillUtils.activationSuccessful(PassiveAbility.WOODCUTTING_DOUBLE_DROPS, getPlayer(), getActivationChance(), Woodcutting.doubleDropsMaxChance, Woodcutting.doubleDropsMaxLevel);
+        return Permissions.doubleDrops(getPlayer(), skill) && SkillUtils.activationSuccessful(PassiveAbility.WOODCUTTING_DOUBLE_DROPS, getPlayer(), getSkillLevel(), getActivationChance(), Woodcutting.doubleDropsMaxChance, Woodcutting.doubleDropsMaxLevel);
     }
 
     /**

@@ -117,7 +117,7 @@ public class TamingManager extends SkillManager {
      * @param wolf The wolf using the ability
      */
     public double gore(LivingEntity target, double damage, Wolf wolf) {
-        if (!SkillUtils.activationSuccessful(PassiveAbility.GORE, getPlayer(), getActivationChance(), Taming.goreMaxChance, Taming.goreMaxBonusLevel)) {
+        if (!SkillUtils.activationSuccessful(PassiveAbility.GORE, getPlayer(), getSkillLevel(), getActivationChance(), Taming.goreMaxChance, Taming.goreMaxBonusLevel)) {
             return 0;
         }
 

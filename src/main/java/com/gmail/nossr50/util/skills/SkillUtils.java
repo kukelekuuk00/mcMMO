@@ -189,12 +189,11 @@ public class SkillUtils {
         itemStack.setDurability((short) Math.min(itemStack.getDurability() + durabilityModifier, maxDurability));
     }
 
-    public static boolean activationSuccessful(PassiveAbility passiveAbility, Player player, SkillType skill, double maxChance, int maxLevel) {
-        return activationSuccessful(passiveAbility, player, PerksUtils.handleLuckyPerks(player, skill), maxChance, maxLevel);
+    public static boolean activationSuccessful(PassiveAbility passiveAbility, Player player, int skillLevel, SkillType skill, double maxChance, int maxLevel) {
+        return activationSuccessful(passiveAbility, player, skillLevel, PerksUtils.handleLuckyPerks(player, skill), maxChance, maxLevel);
     }
 
-    public static boolean activationSuccessful(PassiveAbility passiveAbility, Player player, int activationChance, double maxChance, int maxLevel) {
-        int skillLevel = UserManager.getPlayer(player).getSkillLevel(passiveAbility.getSkill());
+    public static boolean activationSuccessful(PassiveAbility passiveAbility, Player player, int skillLevel, int activationChance, double maxChance, int maxLevel) {
         double chance = (maxChance / maxLevel) * Math.min(skillLevel, maxLevel) / activationChance;
         PassiveAbilityActivationCheckEvent event = new PassiveAbilityActivationCheckEvent(player, passiveAbility, chance);
         mcMMO.p.getServer().getPluginManager().callEvent(event);
