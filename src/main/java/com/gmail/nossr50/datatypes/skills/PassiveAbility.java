@@ -27,5 +27,6 @@ public enum PassiveAbility {
     WOODCUTTING_DOUBLE_DROPS,
     TREASURE_DROP,
     SHAKE,
+    FLUX_MINING,
     ;
 }

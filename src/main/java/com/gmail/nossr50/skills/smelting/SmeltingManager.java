@@ -10,6 +10,7 @@ import com.gmail.nossr50.mcMMO;
 import com.gmail.nossr50.datatypes.player.McMMOPlayer;
 import com.gmail.nossr50.datatypes.skills.PassiveAbility;
 import com.gmail.nossr50.datatypes.skills.SkillType;
+import com.gmail.nossr50.events.skills.PassiveAbilityActivationCheckEvent;
 import com.gmail.nossr50.locale.LocaleLoader;
 import com.gmail.nossr50.skills.SkillManager;
 import com.gmail.nossr50.skills.mining.Mining;
@@ -41,7 +42,9 @@ public class SmeltingManager extends SkillManager {
     public boolean processFluxMining(BlockState blockState) {
         Player player = getPlayer();
 
-        if (Smelting.fluxMiningChance > Misc.getRandom().nextInt(getActivationChance())) {
+        PassiveAbilityActivationCheckEvent event = new PassiveAbilityActivationCheckEvent(getPlayer(), PassiveAbility.FLUX_MINING, Smelting.fluxMiningChance / getActivationChance());
+        mcMMO.p.getServer().getPluginManager().callEvent(event);
+        if ((event.getChance() * getActivationChance()) > Misc.getRandom().nextInt(getActivationChance())) {
             ItemStack item = null;
 
             switch (blockState.getType()) {
