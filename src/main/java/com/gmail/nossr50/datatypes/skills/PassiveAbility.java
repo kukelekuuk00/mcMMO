@@ -1,41 +1,31 @@
 package com.gmail.nossr50.datatypes.skills;
 
 public enum PassiveAbility {
-    IRON_GRIP(SkillType.UNARMED),
-    DEFLECT(SkillType.UNARMED),
-    DISARM(SkillType.UNARMED),
-    DODGE(SkillType.ACROBATICS),
-    ROLL(SkillType.ACROBATICS),
-    GRACEFUL_ROLL(SkillType.ACROBATICS),
-    TRACK_ARROWS(SkillType.ARCHERY),
-    DAZE(SkillType.ARCHERY),
-    CRITICAL_HIT(SkillType.AXES),
-    IMPACT(SkillType.AXES),
-    GREATER_IMPACT(SkillType.AXES),
-    HERBALISM_DOUBLE_DROPS(SkillType.HERBALISM),
-    GREEN_THUMB(SkillType.HERBALISM),
-    SHROOM_THUMB(SkillType.HERBALISM),
-    HYLIAN_LUCK(SkillType.HERBALISM),
-    GREEN_THUMB_BLOCK(SkillType.HERBALISM),
-    MINING_DOUBLE_DROPS(SkillType.MINING),
-    SUPER_REPAIR(SkillType.MINING),
-    SECOND_SMELT(SkillType.SMELTING),
-    BLEED(SkillType.SWORDS),
-    COUNTER_ATTACK(SkillType.SWORDS),
-    FAST_FOOD(SkillType.TAMING),
-    GORE(SkillType.TAMING),
-    WOODCUTTING_DOUBLE_DROPS(SkillType.WOODCUTTING),
-    TREASURE_DROP(SkillType.EXCAVATION),
+    IRON_GRIP,
+    DEFLECT,
+    DISARM,
+    DODGE,
+    ROLL,
+    GRACEFUL_ROLL,
+    TRACK_ARROWS,
+    DAZE,
+    CRITICAL_HIT,
+    IMPACT,
+    GREATER_IMPACT,
+    HERBALISM_DOUBLE_DROPS,
+    GREEN_THUMB,
+    SHROOM_THUMB,
+    HYLIAN_LUCK,
+    GREEN_THUMB_BLOCK,
+    MINING_DOUBLE_DROPS,
+    SUPER_REPAIR,
+    SECOND_SMELT,
+    BLEED,
+    COUNTER_ATTACK,
+    FAST_FOOD,
+    GORE,
+    WOODCUTTING_DOUBLE_DROPS,
+    TREASURE_DROP,
+    SHAKE,
     ;
-
-
-    private SkillType skill;
-
-    private PassiveAbility(SkillType skill) {
-        this.skill = skill;
-    }
-
-    public SkillType getSkill() {
-        return skill;
-    }
 }

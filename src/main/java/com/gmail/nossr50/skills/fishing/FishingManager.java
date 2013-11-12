@@ -41,11 +41,13 @@ import com.gmail.nossr50.config.Config;
 import com.gmail.nossr50.config.experience.ExperienceConfig;
 import com.gmail.nossr50.config.treasure.TreasureConfig;
 import com.gmail.nossr50.datatypes.player.McMMOPlayer;
+import com.gmail.nossr50.datatypes.skills.PassiveAbility;
 import com.gmail.nossr50.datatypes.skills.SkillType;
 import com.gmail.nossr50.datatypes.treasure.EnchantmentTreasure;
 import com.gmail.nossr50.datatypes.treasure.FishingTreasure;
 import com.gmail.nossr50.datatypes.treasure.Rarity;
 import com.gmail.nossr50.datatypes.treasure.ShakeTreasure;
+import com.gmail.nossr50.events.skills.PassiveAbilityActivationCheckEvent;
 import com.gmail.nossr50.events.skills.fishing.McMMOPlayerFishingTreasureEvent;
 import com.gmail.nossr50.events.skills.fishing.McMMOPlayerShakeEvent;
 import com.gmail.nossr50.locale.LocaleLoader;
@@ -375,7 +377,9 @@ public class FishingManager extends SkillManager {
     public void shakeCheck(LivingEntity target) {
         fishingTries--; // Because autoclicking to shake is OK.
 
-        if (getShakeProbability() > Misc.getRandom().nextInt(getActivationChance())) {
+        PassiveAbilityActivationCheckEvent event = new PassiveAbilityActivationCheckEvent(getPlayer(), PassiveAbility.SHAKE, getShakeProbability() / getActivationChance());
+        mcMMO.p.getServer().getPluginManager().callEvent(event);
+        if ((event.getChance() * getActivationChance()) > Misc.getRandom().nextInt(getActivationChance())) {
             List<ShakeTreasure> possibleDrops = Fishing.findPossibleDrops(target);
 
             if (possibleDrops == null || possibleDrops.isEmpty()) {
