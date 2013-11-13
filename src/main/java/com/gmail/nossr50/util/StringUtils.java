@@ -4,6 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 
 import com.gmail.nossr50.datatypes.skills.AbilityType;
+import com.gmail.nossr50.datatypes.skills.PassiveAbility;
 
 public class StringUtils {
     /**
@@ -26,6 +27,10 @@ public class StringUtils {
 
     public static String getPrettyAbilityString(AbilityType ability) {
         return createPrettyEnumString(ability.toString());
+    }
+
+    public static String getPrettyPassiveAbilityString(PassiveAbility passiveAbility) {
+        return createPrettyEnumString(passiveAbility.toString());
     }
 
     private static String createPrettyEnumString(String baseString) {

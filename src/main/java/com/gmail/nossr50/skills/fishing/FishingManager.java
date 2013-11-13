@@ -429,11 +429,11 @@ public class FishingManager extends SkillManager {
                     break;
             }
 
-            McMMOPlayerShakeEvent event = new McMMOPlayerShakeEvent(getPlayer(), drop);
+            McMMOPlayerShakeEvent shakeEvent = new McMMOPlayerShakeEvent(getPlayer(), drop);
 
-            drop = event.getDrop();
+            drop = shakeEvent.getDrop();
 
-            if (event.isCancelled() || drop == null) {
+            if (shakeEvent.isCancelled() || drop == null) {
                 return;
             }
 

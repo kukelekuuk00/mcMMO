@@ -189,8 +189,12 @@ public class SkillUtils {
         itemStack.setDurability((short) Math.min(itemStack.getDurability() + durabilityModifier, maxDurability));
     }
 
-    public static boolean activationSuccessful(PassiveAbility passiveAbility, Player player, int skillLevel, SkillType skill, double maxChance, int maxLevel) {
-        return activationSuccessful(passiveAbility, player, skillLevel, PerksUtils.handleLuckyPerks(player, skill), maxChance, maxLevel);
+    public static boolean activationSuccessful(PassiveAbility passiveAbility, Player player, SkillType skill, double maxChance, int maxLevel) {
+        return activationSuccessful(passiveAbility, player, UserManager.getPlayer(player).getSkillLevel(skill), PerksUtils.handleLuckyPerks(player, skill), maxChance, maxLevel);
+    }
+
+    public static boolean activationSuccessful(PassiveAbility passiveAbility, Player player, int skillLevel, int activationChance) {
+        return activationSuccessful(passiveAbility, player, skillLevel, activationChance, passiveAbility.getMaxChance(), passiveAbility.getMaxLevel());
     }
 
     public static boolean activationSuccessful(PassiveAbility passiveAbility, Player player, int skillLevel, int activationChance, double maxChance, int maxLevel) {

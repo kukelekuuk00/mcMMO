@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.gmail.nossr50.datatypes.skills.PassiveAbility;
+import com.gmail.nossr50.datatypes.skills.SkillType;
 import com.gmail.nossr50.skills.fishing.Fishing;
 import com.gmail.nossr50.skills.mining.BlastMining;
 import com.gmail.nossr50.skills.repair.ArcaneForging;
 import com.gmail.nossr50.skills.smelting.Smelting;
+import com.gmail.nossr50.util.StringUtils;
 
 public class AdvancedConfig extends AutoUpdateConfigLoader {
     private static AdvancedConfig instance;
@@ -40,11 +43,11 @@ public class AdvancedConfig extends AutoUpdateConfigLoader {
         }
 
         /* ACROBATICS */
-        if (getDodgeChanceMax() < 1) {
+        if (getMaxChance(PassiveAbility.DODGE) < 1) {
             reason.add("Skills.Acrobatics.Dodge.ChanceMax should be at least 1!");
         }
 
-        if (getDodgeMaxBonusLevel() < 1) {
+        if (getMaxBonusLevel(PassiveAbility.DODGE) < 1) {
             reason.add("Skills.Acrobatics.Dodge.MaxBonusLevel should be at least 1!");
         }
 
@@ -611,9 +614,10 @@ public class AdvancedConfig extends AutoUpdateConfigLoader {
     public int getAbilityLength() { return config.getInt("Skills.General.Ability.IncreaseLevel", 50); }
     public int getEnchantBuff() { return config.getInt("Skills.General.Ability.EnchantBuff", 5); }
 
+    public int getMaxBonusLevel(PassiveAbility passiveAbility) { return config.getInt("Skills." + StringUtils.getCapitalized(SkillType.byPassiveAbility(passiveAbility).toString()) + "." + StringUtils.getPrettyPassiveAbilityString(passiveAbility).replace("_", "") + "." + "MaxBonusLevel"); }
+    public double getMaxChance(PassiveAbility passiveAbility) { return config.getInt("Skills." + StringUtils.getCapitalized(SkillType.byPassiveAbility(passiveAbility).toString()) + "." + StringUtils.getPrettyPassiveAbilityString(passiveAbility).replace("_", "") + "." + "ChanceMax"); }
+
     /* ACROBATICS */
-    public double getDodgeChanceMax() { return config.getDouble("Skills.Acrobatics.Dodge.ChanceMax", 20.0D); }
-    public int getDodgeMaxBonusLevel() { return config.getInt("Skills.Acrobatics.Dodge.MaxBonusLevel", 800); }
     public double getDodgeDamageModifier() { return config.getDouble("Skills.Acrobatics.Dodge.DamageModifier", 2.0D); }
 
     public double getRollChanceMax() { return config.getDouble("Skills.Acrobatics.Roll.ChanceMax", 100.0D); }

@@ -11,6 +11,7 @@ import org.bukkit.plugin.PluginManager;
 
 import com.gmail.nossr50.mcMMO;
 import com.gmail.nossr50.commands.party.PartySubcommandType;
+import com.gmail.nossr50.datatypes.skills.PassiveAbility;
 import com.gmail.nossr50.datatypes.skills.SkillType;
 
 public final class Permissions {
@@ -126,11 +127,7 @@ public final class Permissions {
     public static boolean doubleDrops(Permissible permissible, SkillType skill) { return permissible.hasPermission("mcmmo.ability." + skill.toString().toLowerCase() + ".doubledrops"); }
     public static boolean vanillaXpBoost(Permissible permissible, SkillType skill) { return permissible.hasPermission("mcmmo.ability." + skill.toString().toLowerCase() + ".vanillaxpboost"); }
     public static boolean bonusDamage(Permissible permissible, SkillType skill) { return permissible.hasPermission("mcmmo.ability." + skill.toString().toLowerCase() + ".bonusdamage"); }
-
-    /* ACROBATICS */
-    public static boolean dodge(Permissible permissible) { return permissible.hasPermission("mcmmo.ability.acrobatics.dodge"); }
-    public static boolean gracefulRoll(Permissible permissible) { return permissible.hasPermission("mcmmo.ability.acrobatics.gracefulroll"); }
-    public static boolean roll(Permissible permissible) { return permissible.hasPermission("mcmmo.ability.acrobatics.roll"); }
+    public static boolean passiveAbilityEnabled(Permissible permissible, PassiveAbility passiveAbility) { return permissible.hasPermission("mcmmo.ability." + SkillType.byPassiveAbility(passiveAbility).toString().toLowerCase() + "." + StringUtils.getPrettyPassiveAbilityString(passiveAbility).replace("_", "").toLowerCase()); }
 
     /* ARCHERY */
     public static boolean arrowRetrieval(Permissible permissible) { return permissible.hasPermission("mcmmo.ability.archery.trackarrows"); }

@@ -5,10 +5,9 @@ import java.util.List;
 
 import org.bukkit.entity.Player;
 
+import com.gmail.nossr50.datatypes.skills.PassiveAbility;
 import com.gmail.nossr50.datatypes.skills.SkillType;
 import com.gmail.nossr50.locale.LocaleLoader;
-import com.gmail.nossr50.skills.acrobatics.Acrobatics;
-import com.gmail.nossr50.util.Permissions;
 
 public class AcrobaticsCommand extends SkillCommand {
     private String dodgeChance;
@@ -30,21 +29,21 @@ public class AcrobaticsCommand extends SkillCommand {
     protected void dataCalculations(Player player, float skillValue, boolean isLucky) {
         // DODGE
         if (canDodge) {
-            String[] dodgeStrings = calculateAbilityDisplayValues(skillValue, Acrobatics.dodgeMaxBonusLevel, Acrobatics.dodgeMaxChance, isLucky);
+            String[] dodgeStrings = calculateAbilityDisplayValues(skillValue, PassiveAbility.DODGE, isLucky);
             dodgeChance = dodgeStrings[0];
             dodgeChanceLucky = dodgeStrings[1];
         }
 
         // ROLL
         if (canRoll) {
-            String[] rollStrings = calculateAbilityDisplayValues(skillValue, Acrobatics.rollMaxBonusLevel, Acrobatics.rollMaxChance, isLucky);
+            String[] rollStrings = calculateAbilityDisplayValues(skillValue, PassiveAbility.ROLL, isLucky);
             rollChance = rollStrings[0];
             rollChanceLucky = rollStrings[1];
         }
 
         // GRACEFUL ROLL
         if (canGracefulRoll) {
-            String[] gracefulRollStrings = calculateAbilityDisplayValues(skillValue, Acrobatics.gracefulRollMaxBonusLevel, Acrobatics.gracefulRollMaxChance, isLucky);
+            String[] gracefulRollStrings = calculateAbilityDisplayValues(skillValue, PassiveAbility.GRACEFUL_ROLL, isLucky);
             gracefulRollChance = gracefulRollStrings[0];
             gracefulRollChanceLucky = gracefulRollStrings[1];
         }
@@ -52,9 +51,9 @@ public class AcrobaticsCommand extends SkillCommand {
 
     @Override
     protected void permissionsCheck(Player player) {
-        canDodge = Permissions.dodge(player);
-        canRoll = Permissions.roll(player);
-        canGracefulRoll = Permissions.gracefulRoll(player);
+        canDodge = PassiveAbility.DODGE.hasPermission(player);
+        canRoll = PassiveAbility.ROLL.hasPermission(player);
+        canGracefulRoll = PassiveAbility.GRACEFUL_ROLL.hasPermission(player);
     }
 
     @Override

@@ -15,7 +15,6 @@ import com.gmail.nossr50.datatypes.skills.SkillType;
 import com.gmail.nossr50.locale.LocaleLoader;
 import com.gmail.nossr50.skills.SkillManager;
 import com.gmail.nossr50.util.Misc;
-import com.gmail.nossr50.util.Permissions;
 import com.gmail.nossr50.util.skills.ParticleEffectUtils;
 import com.gmail.nossr50.util.skills.SkillUtils;
 
@@ -28,11 +27,11 @@ public class AcrobaticsManager extends SkillManager {
     }
 
     public boolean canRoll() {
-        return !exploitPrevention() && Permissions.roll(getPlayer());
+        return !exploitPrevention() && PassiveAbility.ROLL.hasPermission(getPlayer());
     }
 
     public boolean canDodge(Entity damager) {
-        if (Permissions.dodge(getPlayer())) {
+        if (PassiveAbility.DODGE.hasPermission(getPlayer())) {
             if (damager instanceof LightningStrike && Acrobatics.dodgeLightningDisabled) {
                 return false;
             }
@@ -53,7 +52,7 @@ public class AcrobaticsManager extends SkillManager {
         double modifiedDamage = Acrobatics.calculateModifiedDodgeDamage(damage, Acrobatics.dodgeDamageModifier);
         Player player = getPlayer();
 
-        if (!isFatal(modifiedDamage) && SkillUtils.activationSuccessful(PassiveAbility.DODGE, player, getSkillLevel(), getActivationChance(), Acrobatics.dodgeMaxChance, Acrobatics.dodgeMaxBonusLevel)) {
+        if (!isFatal(modifiedDamage) && SkillUtils.activationSuccessful(PassiveAbility.DODGE, player, getSkillLevel(), getActivationChance())) {
             ParticleEffectUtils.playDodgeEffect(player);
 
             if (mcMMOPlayer.useChatNotifications()) {
@@ -80,13 +79,13 @@ public class AcrobaticsManager extends SkillManager {
     public double rollCheck(double damage) {
         Player player = getPlayer();
 
-        if (player.isSneaking() && Permissions.gracefulRoll(player)) {
+        if (player.isSneaking() && PassiveAbility.GRACEFUL_ROLL.hasPermission(player)) {
             return gracefulRollCheck(damage);
         }
 
         double modifiedDamage = Acrobatics.calculateModifiedRollDamage(damage, Acrobatics.rollThreshold);
 
-        if (!isFatal(modifiedDamage) && SkillUtils.activationSuccessful(PassiveAbility.ROLL, player, getSkillLevel(), getActivationChance(), Acrobatics.rollMaxChance, Acrobatics.rollMaxBonusLevel)) {
+        if (!isFatal(modifiedDamage) && SkillUtils.activationSuccessful(PassiveAbility.ROLL, player, getSkillLevel(), getActivationChance())) {
             player.sendMessage(LocaleLoader.getString("Acrobatics.Roll.Text"));
             applyXpGain(calculateRollXP(damage, true));
 
@@ -110,7 +109,7 @@ public class AcrobaticsManager extends SkillManager {
     private double gracefulRollCheck(double damage) {
         double modifiedDamage = Acrobatics.calculateModifiedRollDamage(damage, Acrobatics.gracefulRollThreshold);
 
-        if (!isFatal(modifiedDamage) && SkillUtils.activationSuccessful(PassiveAbility.GRACEFUL_ROLL, getPlayer(), getSkillLevel(), getActivationChance(), Acrobatics.gracefulRollMaxChance, Acrobatics.gracefulRollMaxBonusLevel)) {
+        if (!isFatal(modifiedDamage) && SkillUtils.activationSuccessful(PassiveAbility.GRACEFUL_ROLL, getPlayer(), getSkillLevel(), getActivationChance())) {
             getPlayer().sendMessage(LocaleLoader.getString("Acrobatics.Ability.Proc"));
             applyXpGain(calculateRollXP(damage, true));
 
