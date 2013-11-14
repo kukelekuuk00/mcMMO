@@ -43,7 +43,7 @@ public class ArcheryCommand extends SkillCommand {
 
         // RETRIEVE
         if (canRetrieve) {
-            String[] retrieveStrings = calculateAbilityDisplayValues(skillValue, PassiveAbility.TRACK_ARROWS, isLucky);
+            String[] retrieveStrings = calculateAbilityDisplayValues(skillValue, PassiveAbility.RETRIEVE, isLucky);
             retrieveChance = retrieveStrings[0];
             retrieveChanceLucky = retrieveStrings[1];
         }
@@ -53,7 +53,7 @@ public class ArcheryCommand extends SkillCommand {
     protected void permissionsCheck(Player player) {
         canSkillShot = Permissions.bonusDamage(player, skill);
         canDaze = PassiveAbility.DAZE.hasPermission(player);
-        canRetrieve = PassiveAbility.TRACK_ARROWS.hasPermission(player);
+        canRetrieve = PassiveAbility.RETRIEVE.hasPermission(player);
     }
 
     @Override

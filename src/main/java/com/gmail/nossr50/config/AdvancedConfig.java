@@ -104,11 +104,11 @@ public class AdvancedConfig extends AutoUpdateConfigLoader {
             reason.add("Skills.Acrobatics.Daze.BonusDamage should be at least 0!");
         }
 
-        if (PassiveAbility.TRACK_ARROWS.getMaxChance() < 1) {
+        if (PassiveAbility.RETRIEVE.getMaxChance() < 1) {
             reason.add("Skills.Acrobatics.Retrieve.ChanceMax should be at least 1!");
         }
 
-        if (PassiveAbility.TRACK_ARROWS.getMaxLevel() < 1) {
+        if (PassiveAbility.RETRIEVE.getMaxLevel() < 1) {
             reason.add("Skills.Acrobatics.Retrieve.MaxBonusLevel should be at least 1!");
         }
 
@@ -231,35 +231,35 @@ public class AdvancedConfig extends AutoUpdateConfigLoader {
             reason.add("Skills.Herbalism.GreenThumb.StageChange should be at least 1!");
         }
 
-        if (getGreenThumbChanceMax() < 1) {
+        if (PassiveAbility.GREEN_THUMB.getMaxChance() < 1) {
             reason.add("Skills.Herbalism.GreenThumb.ChanceMax should be at least 1!");
         }
 
-        if (getGreenThumbMaxLevel() < 1) {
+        if (PassiveAbility.GREEN_THUMB.getMaxLevel() < 1) {
             reason.add("Skills.Herbalism.GreenThumb.MaxBonusLevel should be at least 1!");
         }
 
-        if (getHerbalismDoubleDropsChanceMax() < 1) {
+        if (PassiveAbility.HERBALISM_DOUBLE_DROPS.getMaxChance() < 1) {
             reason.add("Skills.Herbalism.DoubleDrops.ChanceMax should be at least 1!");
         }
 
-        if (getHerbalismDoubleDropsMaxLevel() < 1) {
+        if (PassiveAbility.HERBALISM_DOUBLE_DROPS.getMaxLevel() < 1) {
             reason.add("Skills.Herbalism.DoubleDrops.MaxBonusLevel should be at least 1!");
         }
 
-        if (getHylianLuckChanceMax() < 1) {
+        if (PassiveAbility.HYLIAN_LUCK.getMaxChance() < 1) {
             reason.add("Skills.Herbalism.HylianLuck.ChanceMax should be at least 1!");
         }
 
-        if (getHylianLuckMaxLevel() < 1) {
+        if (PassiveAbility.HYLIAN_LUCK.getMaxLevel() < 1) {
             reason.add("Skills.Herbalism.HylianLuck.MaxBonusLevel should be at least 1!");
         }
 
-        if (getShroomThumbChanceMax() < 1) {
+        if (PassiveAbility.SHROOM_THUMB.getMaxChance() < 1) {
             reason.add("Skills.Herbalism.ShroomThumb.ChanceMax should be at least 1!");
         }
 
-        if (getShroomThumbMaxLevel() < 1) {
+        if (PassiveAbility.SHROOM_THUMB.getMaxLevel() < 1) {
             reason.add("Skills.Herbalism.ShroomThumb.MaxBonusLevel should be at least 1!");
         }
 
@@ -673,17 +673,6 @@ public class AdvancedConfig extends AutoUpdateConfigLoader {
     public int getFarmerDietRankChange() { return config.getInt("Skills.Herbalism.FarmersDiet.RankChange", 200); }
 
     public int getGreenThumbStageChange() { return config.getInt("Skills.Herbalism.GreenThumb.StageChange", 200); }
-    public double getGreenThumbChanceMax() { return config.getDouble("Skills.Herbalism.GreenThumb.ChanceMax", 100.0D); }
-    public int getGreenThumbMaxLevel() { return config.getInt("Skills.Herbalism.GreenThumb.MaxBonusLevel", 1500); }
-
-    public double getHerbalismDoubleDropsChanceMax() { return config.getDouble("Skills.Herbalism.DoubleDrops.ChanceMax", 100.0D); }
-    public int getHerbalismDoubleDropsMaxLevel() { return config.getInt("Skills.Herbalism.DoubleDrops.MaxBonusLevel", 1000); }
-
-    public double getHylianLuckChanceMax() { return config.getDouble("Skills.Herbalism.HylianLuck.ChanceMax", 10.0D); }
-    public int getHylianLuckMaxLevel() { return config.getInt("Skills.Herbalism.HylianLuck.MaxBonusLevel", 1000); }
-
-    public double getShroomThumbChanceMax() { return config.getDouble("Skills.Herbalism.ShroomThumb.ChanceMax", 50.0D); }
-    public int getShroomThumbMaxLevel() { return config.getInt("Skills.Herbalism.ShroomThumb.MaxBonusLevel", 1500); }
 
     /* MINING */
     public double getMiningDoubleDropChance() { return config.getDouble("Skills.Mining.DoubleDrops.ChanceMax", 100.0D); }

@@ -35,15 +35,15 @@ import com.google.common.collect.ImmutableList;
 
 public enum SkillType {
     ACROBATICS(AcrobaticsManager.class, Color.WHITE, ImmutableList.of(PassiveAbility.DODGE, PassiveAbility.ROLL, PassiveAbility.GRACEFUL_ROLL)),
-    ARCHERY(ArcheryManager.class, Color.MAROON, ImmutableList.of(PassiveAbility.TRACK_ARROWS, PassiveAbility.DAZE)),
-    AXES(AxesManager.class, Color.AQUA, AbilityType.SKULL_SPLITTER, ToolType.AXE, ImmutableList.of(PassiveAbility.CRITICAL_HIT, PassiveAbility.IMPACT, PassiveAbility.GREATER_IMPACT)),
+    ARCHERY(ArcheryManager.class, Color.MAROON, ImmutableList.of(PassiveAbility.RETRIEVE, PassiveAbility.DAZE)),
+    AXES(AxesManager.class, Color.AQUA, AbilityType.SKULL_SPLITTER, ToolType.AXE, ImmutableList.of(PassiveAbility.AXES_CRITICAL, PassiveAbility.IMPACT, PassiveAbility.GREATER_IMPACT)),
     EXCAVATION(ExcavationManager.class, Color.fromRGB(139, 69, 19), AbilityType.GIGA_DRILL_BREAKER, ToolType.SHOVEL, ImmutableList.of(PassiveAbility.TREASURE_DROP)),
     FISHING(FishingManager.class, Color.NAVY, ImmutableList.of(PassiveAbility.SHAKE)),
     HERBALISM(HerbalismManager.class, Color.GREEN, AbilityType.GREEN_TERRA, ToolType.HOE, ImmutableList.of(PassiveAbility.GREEN_THUMB, PassiveAbility.SHROOM_THUMB, PassiveAbility.HYLIAN_LUCK, PassiveAbility.GREEN_THUMB_BLOCK, PassiveAbility.HERBALISM_DOUBLE_DROPS)),
     MINING(MiningManager.class, Color.GRAY, AbilityType.SUPER_BREAKER, ToolType.PICKAXE, ImmutableList.of(PassiveAbility.MINING_DOUBLE_DROPS)),
     REPAIR(RepairManager.class, Color.SILVER, ImmutableList.of(PassiveAbility.SUPER_REPAIR)),
     SMELTING(SmeltingManager.class, Color.YELLOW, ImmutableList.of(PassiveAbility.SECOND_SMELT, PassiveAbility.FLUX_MINING)),
-    SWORDS(SwordsManager.class, Color.fromRGB(178, 34, 34), AbilityType.SERRATED_STRIKES, ToolType.SWORD, ImmutableList.of(PassiveAbility.BLEED, PassiveAbility.COUNTER_ATTACK)),
+    SWORDS(SwordsManager.class, Color.fromRGB(178, 34, 34), AbilityType.SERRATED_STRIKES, ToolType.SWORD, ImmutableList.of(PassiveAbility.BLEED, PassiveAbility.COUNTER)),
     TAMING(TamingManager.class, Color.PURPLE, ImmutableList.of(PassiveAbility.FAST_FOOD, PassiveAbility.GORE)),
     UNARMED(UnarmedManager.class, Color.BLACK, AbilityType.BERSERK, ToolType.FISTS, ImmutableList.of(PassiveAbility.IRON_GRIP, PassiveAbility.DEFLECT, PassiveAbility.DISARM)),
     WOODCUTTING(WoodcuttingManager.class, Color.OLIVE, AbilityType.TREE_FELLER, ToolType.AXE, ImmutableList.of(PassiveAbility.WOODCUTTING_DOUBLE_DROPS));

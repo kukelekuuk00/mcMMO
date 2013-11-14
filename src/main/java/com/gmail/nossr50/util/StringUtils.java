@@ -30,7 +30,16 @@ public class StringUtils {
     }
 
     public static String getPrettyPassiveAbilityString(PassiveAbility passiveAbility) {
-        return createPrettyEnumString(passiveAbility.toString());
+        switch(passiveAbility) {
+            case HERBALISM_DOUBLE_DROPS:
+            case MINING_DOUBLE_DROPS:
+            case WOODCUTTING_DOUBLE_DROPS:
+                return "DoubleDrops";
+            case GREEN_THUMB_BLOCK:
+                return "GreenThumb";
+            default:
+                return createPrettyEnumString(passiveAbility.toString());
+        }
     }
 
     private static String createPrettyEnumString(String baseString) {

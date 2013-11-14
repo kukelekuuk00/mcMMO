@@ -6,6 +6,7 @@ import java.util.List;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
+import com.gmail.nossr50.datatypes.skills.PassiveAbility;
 import com.gmail.nossr50.datatypes.skills.SkillType;
 import com.gmail.nossr50.locale.LocaleLoader;
 import com.gmail.nossr50.skills.herbalism.Herbalism;
@@ -55,28 +56,28 @@ public class HerbalismCommand extends SkillCommand {
         if (canGreenThumbBlocks || canGreenThumbPlants) {
             greenThumbStage = calculateRank(skillValue, Herbalism.greenThumbStageMaxLevel, Herbalism.greenThumbStageChangeLevel);
 
-            String[] greenThumbStrings = calculateAbilityDisplayValues(skillValue, Herbalism.greenThumbMaxLevel, Herbalism.greenThumbMaxChance, isLucky);
+            String[] greenThumbStrings = calculateAbilityDisplayValues(skillValue, PassiveAbility.GREEN_THUMB, isLucky);
             greenThumbChance = greenThumbStrings[0];
             greenThumbChanceLucky = greenThumbStrings[1];
         }
 
         // DOUBLE DROPS
         if (canDoubleDrop) {
-            String[] doubleDropStrings = calculateAbilityDisplayValues(skillValue, Herbalism.doubleDropsMaxLevel, Herbalism.doubleDropsMaxChance, isLucky);
+            String[] doubleDropStrings = calculateAbilityDisplayValues(skillValue, PassiveAbility.HERBALISM_DOUBLE_DROPS, isLucky);
             doubleDropChance = doubleDropStrings[0];
             doubleDropChanceLucky = doubleDropStrings[1];
         }
 
         // HYLIAN LUCK
         if (hasHylianLuck) {
-            String[] hylianLuckStrings = calculateAbilityDisplayValues(skillValue, Herbalism.hylianLuckMaxLevel, Herbalism.hylianLuckMaxChance, isLucky);
+            String[] hylianLuckStrings = calculateAbilityDisplayValues(skillValue, PassiveAbility.HYLIAN_LUCK, isLucky);
             hylianLuckChance = hylianLuckStrings[0];
             hylianLuckChanceLucky = hylianLuckStrings[1];
         }
 
         // SHROOM THUMB
         if (canShroomThumb) {
-            String[] shroomThumbStrings = calculateAbilityDisplayValues(skillValue, Herbalism.shroomThumbMaxLevel, Herbalism.shroomThumbMaxChance, isLucky);
+            String[] shroomThumbStrings = calculateAbilityDisplayValues(skillValue, PassiveAbility.SHROOM_THUMB, isLucky);
             shroomThumbChance = shroomThumbStrings[0];
             shroomThumbChanceLucky = shroomThumbStrings[1];
         }

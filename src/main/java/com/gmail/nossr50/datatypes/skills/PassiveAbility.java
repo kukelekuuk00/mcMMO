@@ -12,9 +12,9 @@ public enum PassiveAbility {
     ROLL,
 
     /* ARCHERY */
-    TRACK_ARROWS,
+    RETRIEVE,
     DAZE,
-    CRITICAL_HIT,
+    AXES_CRITICAL,
     IMPACT,
     GREATER_IMPACT,
     HERBALISM_DOUBLE_DROPS,
@@ -26,7 +26,7 @@ public enum PassiveAbility {
     SUPER_REPAIR,
     SECOND_SMELT,
     BLEED,
-    COUNTER_ATTACK,
+    COUNTER,
     FAST_FOOD,
     GORE,
     WOODCUTTING_DOUBLE_DROPS,
