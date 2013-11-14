@@ -55,11 +55,11 @@ public class AdvancedConfig extends AutoUpdateConfigLoader {
             reason.add("Skills.Acrobatics.Dodge.DamageModifier should be greater than 1!");
         }
 
-        if (getRollChanceMax() < 1) {
+        if (PassiveAbility.ROLL.getMaxChance() < 1) {
             reason.add("Skills.Acrobatics.Roll.ChanceMax should be at least 1!");
         }
 
-        if (getRollMaxBonusLevel() < 1) {
+        if (PassiveAbility.ROLL.getMaxLevel() < 1) {
             reason.add("Skills.Acrobatics.Roll.MaxBonusLevel should be at least 1!");
         }
 
@@ -67,11 +67,11 @@ public class AdvancedConfig extends AutoUpdateConfigLoader {
             reason.add("Skills.Acrobatics.Roll.DamageThreshold should be at least 0!");
         }
 
-        if (getGracefulRollChanceMax() < 1) {
+        if (PassiveAbility.GRACEFUL_ROLL.getMaxChance() < 1) {
             reason.add("Skills.Acrobatics.GracefulRoll.ChanceMax should be at least 1!");
         }
 
-        if (getGracefulRollMaxBonusLevel() < 1) {
+        if (PassiveAbility.GRACEFUL_ROLL.getMaxLevel() < 1) {
             reason.add("Skills.Acrobatics.GracefulRoll.MaxBonusLevel should be at least 1!");
         }
 
@@ -92,11 +92,11 @@ public class AdvancedConfig extends AutoUpdateConfigLoader {
             reason.add("Skills.Archery.SkillShot.MaxBonus should be at least 0!");
         }
 
-        if (getDazeBonusMax() < 1) {
+        if (PassiveAbility.DAZE.getMaxChance() < 1) {
             reason.add("Skills.Acrobatics.Daze.ChanceMax should be at least 1!");
         }
 
-        if (getDazeMaxBonusLevel() < 1) {
+        if (PassiveAbility.DAZE.getMaxLevel() < 1) {
             reason.add("Skills.Acrobatics.Daze.MaxBonusLevel should be at least 1!");
         }
 
@@ -104,11 +104,11 @@ public class AdvancedConfig extends AutoUpdateConfigLoader {
             reason.add("Skills.Acrobatics.Daze.BonusDamage should be at least 0!");
         }
 
-        if (getRetrieveChanceMax() < 1) {
+        if (PassiveAbility.TRACK_ARROWS.getMaxChance() < 1) {
             reason.add("Skills.Acrobatics.Retrieve.ChanceMax should be at least 1!");
         }
 
-        if (getRetrieveMaxBonusLevel() < 1) {
+        if (PassiveAbility.TRACK_ARROWS.getMaxLevel() < 1) {
             reason.add("Skills.Acrobatics.Retrieve.MaxBonusLevel should be at least 1!");
         }
 
@@ -620,12 +620,8 @@ public class AdvancedConfig extends AutoUpdateConfigLoader {
     /* ACROBATICS */
     public double getDodgeDamageModifier() { return config.getDouble("Skills.Acrobatics.Dodge.DamageModifier", 2.0D); }
 
-    public double getRollChanceMax() { return config.getDouble("Skills.Acrobatics.Roll.ChanceMax", 100.0D); }
-    public int getRollMaxBonusLevel() { return config.getInt("Skills.Acrobatics.Roll.MaxBonusLevel", 1000); }
     public double getRollDamageThreshold() { return config.getDouble("Skills.Acrobatics.Roll.DamageThreshold", 7.0D); }
 
-    public double getGracefulRollChanceMax() { return config.getDouble("Skills.Acrobatics.GracefulRoll.ChanceMax", 100.0D); }
-    public int getGracefulRollMaxBonusLevel() { return config.getInt("Skills.Acrobatics.GracefulRoll.MaxBonusLevel", 500); }
     public double getGracefulRollDamageThreshold() { return config.getDouble("Skills.Acrobatics.GracefulRoll.DamageThreshold", 14.0D); }
 
     /* ARCHERY */
@@ -634,12 +630,7 @@ public class AdvancedConfig extends AutoUpdateConfigLoader {
     public double getSkillShotBonusMax() { return config.getDouble("Skills.Archery.SkillShot.MaxBonus", 2.0D); }
     public double getSkillShotDamageMax() { return config.getDouble("Skills.Archery.SkillShot.MaxDamage", 9.0D); }
 
-    public double getDazeBonusMax() { return config.getDouble("Skills.Archery.Daze.ChanceMax", 50.0D); }
-    public int getDazeMaxBonusLevel() { return config.getInt("Skills.Archery.Daze.MaxBonusLevel", 1000); }
     public double getDazeModifier() { return config.getDouble("Skills.Archery.Daze.BonusDamage", 4.0D); }
-
-    public double getRetrieveChanceMax() { return config.getDouble("Skills.Archery.Retrieve.ChanceMax", 100.0D); }
-    public int getRetrieveMaxBonusLevel() { return config.getInt("Skills.Archery.Retrieve.MaxBonusLevel", 1000); }
 
     public double getForceMultiplier() { return config.getDouble("Skills.Archery.ForceMultiplier", 2.0D); }
 
